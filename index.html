@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up — CHELCIE Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: 240 4% 4%;
+        --paper: 60 20% 98%;
+        --teal: 159 50% 62%;
+        --stone: 42 4% 41%;
+        --border: 43 20% 88%;
+        --destructive: 15 62% 47%;
+        --charcoal-foreground: var(--paper);
+        --charcoal-muted: 42 6% 68%;
+        --charcoal-border: 0 0% 17%;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100vh;
+      }
+
+      body {
+        background: hsl(var(--paper));
+        color: hsl(var(--ink));
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 1.0625rem;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1 {
+        font-family: "Archivo", system-ui, sans-serif;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        margin: 0;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .layout {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      @media (min-width: 860px) {
+        .layout {
+          grid-template-columns: 40fr 60fr;
+        }
+      }
+
+      /* ── LEFT PANEL ── */
+      .panel-left {
+        background: hsl(var(--ink));
+        padding: 40px 24px;
+        order: 2;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 48px;
+      }
+
+      @media (min-width: 860px) {
+        .panel-left {
+          padding: 40px 56px;
+        }
+      }
+
+      .wordmark {
+        display: inline-flex;
+        align-items: center;
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: hsl(var(--charcoal-foreground));
+        text-decoration: none;
+        transition: opacity 0.15s ease;
+      }
+
+      .wordmark:hover {
+        opacity: 0.8;
+      }
+
+      .wordmark sup {
+        font-size: 0.55em;
+        font-weight: 400;
+        vertical-align: super;
+        position: relative;
+        top: -0.1em;
+        margin-left: 2px;
+      }
+
+      .wordmark--dark {
+        display: flex;
+        color: hsl(var(--ink));
+        margin-bottom: 28px;
+      }
+
+      .overline {
+        font-size: 0.8125rem;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        color: hsl(var(--charcoal-muted));
+        margin: 48px 0 24px;
+      }
+
+      @media (min-width: 860px) {
+        .overline {
+          margin-top: 64px;
+        }
+      }
+
+      .headline {
+        font-size: 2.25rem;
+        line-height: 1.1;
+        color: hsl(var(--charcoal-foreground));
+        margin-bottom: 24px;
+      }
+
+      @media (min-width: 860px) {
+        .headline {
+          font-size: 3rem;
+        }
+      }
+
+      .lede {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: hsl(var(--charcoal-muted));
+        max-width: 22rem;
+        margin: 0;
+      }
+
+      .reassurances {
+        margin-top: 48px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+
+      @media (min-width: 860px) {
+        .reassurances {
+          margin-top: 0;
+        }
+      }
+
+      .reassurance {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      .reassurance .icon {
+        flex-shrink: 0;
+        width: 32px;
+        height: 32px;
+        border-radius: 999px;
+        background: hsl(var(--teal) / 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .reassurance .icon svg {
+        width: 16px;
+        height: 16px;
+        stroke: hsl(var(--teal));
+      }
+
+      .reassurance-title {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: hsl(var(--charcoal-foreground));
+        margin: 0;
+      }
+
+      .reassurance-body {
+        font-size: 0.875rem;
+        color: hsl(var(--charcoal-muted));
+        margin: 2px 0 0;
+      }
+
+      .call-line {
+        font-size: 0.75rem;
+        color: hsl(var(--charcoal-muted));
+        padding-top: 16px;
+        margin-top: 8px;
+        border-top: 1px solid hsl(var(--charcoal-border));
+      }
+
+      .call-line a {
+        text-decoration: underline;
+        color: hsl(var(--charcoal-foreground));
+      }
+
+      /* ── RIGHT PANEL ── */
+      .panel-right {
+        padding: 48px 24px;
+        order: 1;
+        display: flex;
+        align-items: center;
+      }
+
+      @media (min-width: 860px) {
+        .panel-right {
+          padding: 32px 64px;
+        }
+      }
+
+      .form-wrap {
+        width: 100%;
+        max-width: 28rem;
+        margin: 0 auto;
+      }
+
+      .eyebrow {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: hsl(var(--ink));
+        margin: 0 0 8px;
+      }
+
+      .rule {
+        width: 40px;
+        height: 1px;
+        background: hsl(var(--teal));
+        margin-bottom: 32px;
+      }
+
+      .field-group {
+        margin-bottom: 28px;
+      }
+
+      label,
+      .label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 12px;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 28px;
+        margin-bottom: 28px;
+      }
+
+      .row .field-group {
+        margin-bottom: 0;
+      }
+
+      .side-options {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      @media (min-width: 480px) {
+        .side-options {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .side-options .side-option:last-child {
+          grid-column: 1 / -1;
+        }
+      }
+
+      .side-option {
+        text-align: left;
+        border: 1px solid hsl(var(--border));
+        background: hsl(var(--paper));
+        border-radius: 8px;
+        padding: 20px 18px;
+        cursor: pointer;
+        font-family: inherit;
+        transition: border-color 0.15s ease, background 0.15s ease;
+      }
+
+      .side-option:hover {
+        border-color: hsl(var(--ink) / 0.3);
+      }
+
+      .side-option.selected {
+        border-color: hsl(var(--teal));
+        background: hsl(var(--teal) / 0.1);
+      }
+
+      .side-option-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: hsl(var(--ink));
+      }
+
+      .side-option-sub {
+        display: block;
+        font-size: 0.75rem;
+        color: hsl(var(--stone));
+        margin-top: 2px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      select,
+      textarea {
+        width: 100%;
+        font-family: inherit;
+        font-size: 1rem;
+        color: hsl(var(--ink));
+        background: hsl(var(--paper));
+        border: 1px solid hsl(var(--border));
+        border-radius: 6px;
+        padding: 14px 16px;
+        outline: none;
+      }
+
+      select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23707070' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        background-size: 16px 16px;
+        padding-right: 42px;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: hsl(var(--stone) / 0.8);
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: hsl(var(--teal));
+        box-shadow: 0 0 0 2px hsl(var(--teal) / 0.25);
+      }
+
+      input[aria-invalid="true"],
+      select[aria-invalid="true"] {
+        border-color: hsl(var(--destructive));
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 84px;
+      }
+
+      .optional {
+        font-weight: 400;
+        color: hsl(var(--stone));
+      }
+
+      .error-text {
+        font-size: 0.75rem;
+        color: hsl(var(--destructive));
+        margin: 6px 0 0;
+      }
+
+      .submit-btn {
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: hsl(var(--teal));
+        color: hsl(var(--ink));
+        font-family: inherit;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        border: none;
+        border-radius: 6px;
+        padding: 13px 20px;
+        cursor: pointer;
+        transition: opacity 0.15s ease;
+      }
+
+      .submit-btn:hover {
+        opacity: 0.9;
+      }
+
+      .submit-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .fine-print {
+        font-size: 0.8125rem;
+        color: hsl(var(--stone));
+        text-align: center;
+        margin: 20px 0 0;
+      }
+
+      .fine-print a {
+        text-decoration: underline;
+      }
+
+      /* Desktop-only vertical rhythm, tuned to fit one viewport without scrolling. */
+      @media (min-width: 860px) {
+        .field-group {
+          margin-bottom: 22px;
+        }
+
+        .row {
+          gap: 22px;
+          margin-bottom: 22px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+          padding: 12px 16px;
+          font-size: 0.875rem;
+        }
+
+        select {
+          padding-right: 42px;
+        }
+
+        .side-option {
+          padding: 18px 16px;
+        }
+
+        textarea {
+          min-height: 60px;
+        }
+
+        .submit-btn {
+          padding: 12px 20px;
+        }
+
+        .fine-print {
+          margin-top: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <div class="panel-left">
+        <div>
+          <p class="overline">Sign up</p>
+          <h1 class="headline">Let's get started.</h1>
+          <p class="lede">Tell us about your institution, then go straight into setup. No queue, no waiting on approval.</p>
+        </div>
+
+        <div class="reassurances">
+          <div class="reassurance">
+            <span class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"></path>
+              </svg>
+            </span>
+            <div>
+              <p class="reassurance-title">Get started in minutes</p>
+              <p class="reassurance-body">Your onboarding starts right after you sign up.</p>
+            </div>
+          </div>
+          <div class="reassurance">
+            <span class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+            </span>
+            <div>
+              <p class="reassurance-title">No obligation</p>
+              <p class="reassurance-body">Signing up does not commit your institution to anything.</p>
+            </div>
+          </div>
+          <div class="reassurance">
+            <span class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </span>
+            <div>
+              <p class="reassurance-title">Your data stays private</p>
+              <p class="reassurance-body">We never sell or share what you tell us.</p>
+            </div>
+          </div>
+
+          <p class="call-line">Prefer a call? <a href="https://chelciehq.com/contact">Book a call instead</a></p>
+        </div>
+      </div>
+
+      <div class="panel-right">
+        <div class="form-wrap">
+          <div id="form-view">
+            <a class="wordmark wordmark--dark" href="https://chelciehq.com">CHELCIE<sup>™</sup></a>
+            <form id="access-form" novalidate>
+              <div class="field-group">
+                <span class="label" id="side-label">Which side are you on?</span>
+                <div class="side-options" role="radiogroup" aria-labelledby="side-label" id="side-options">
+                  <button type="button" class="side-option" data-value="deploy">
+                    <span class="side-option-label">I deploy capital</span>
+                    <span class="side-option-sub">Foundations, lenders, public programs</span>
+                  </button>
+                  <button type="button" class="side-option" data-value="recipient">
+                    <span class="side-option-label">I receive capital</span>
+                    <span class="side-option-sub">Hospitals, nonprofits, institutions</span>
+                  </button>
+                  <button type="button" class="side-option" data-value="both">
+                    <span class="side-option-label">Both</span>
+                    <span class="side-option-sub">A bit of everything</span>
+                  </button>
+                </div>
+                <p class="error-text" id="error-side" hidden>Select which side you are on.</p>
+              </div>
+
+              <div class="row">
+                <div class="field-group">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" placeholder="Your name" />
+                  <p class="error-text" id="error-name" hidden>Enter your name.</p>
+                </div>
+                <div class="field-group">
+                  <label for="organization">Organization Name</label>
+                  <input type="text" id="organization" placeholder="Company or institution" />
+                  <p class="error-text" id="error-organization" hidden>Enter your organization.</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="field-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" placeholder="you@company.com" />
+                  <p class="error-text" id="error-email" hidden>Enter a valid email address.</p>
+                </div>
+                <div class="field-group">
+                  <label for="role">Role</label>
+                  <select id="role">
+                    <option value="" disabled selected>Select your role</option>
+                    <option value="foundation">Foundation or program officer</option>
+                    <option value="corporate-philanthropy">Corporate philanthropy</option>
+                    <option value="alternative-lender">Alternative lender</option>
+                    <option value="public-agency">Public agency or state program</option>
+                    <option value="university-intermediary">University or intermediary</option>
+                    <option value="health-system-finance">Hospital or health system finance</option>
+                    <option value="cfo">CFO / finance executive</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <p class="error-text" id="error-role" hidden>Select your role.</p>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label for="interest">What are you looking to evaluate? <span class="optional">(optional)</span></label>
+                <textarea id="interest" placeholder="Tell us about the programs, conditions, or capital you are working with..."></textarea>
+              </div>
+
+              <button type="submit" class="submit-btn" id="submit-btn">
+                <span id="submit-label">Sign up</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+
+              <p class="fine-print">
+                By submitting, you agree to our <a href="https://chelciehq.com/privacy">privacy policy</a>. We'll never share your information.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var selectedSide = "";
+        var sideOptions = document.querySelectorAll(".side-option");
+        sideOptions.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            selectedSide = btn.getAttribute("data-value");
+            sideOptions.forEach(function (b) {
+              b.classList.toggle("selected", b === btn);
+            });
+            hideError("side");
+          });
+        });
+
+        var name = document.getElementById("name");
+        var organization = document.getElementById("organization");
+        var email = document.getElementById("email");
+        var role = document.getElementById("role");
+        var form = document.getElementById("access-form");
+        var submitBtn = document.getElementById("submit-btn");
+        var submitLabel = document.getElementById("submit-label");
+
+        function showError(field) {
+          var el = document.getElementById("error-" + field);
+          if (el) el.hidden = false;
+          var input = field === "side" ? null : document.getElementById(field);
+          if (input) input.setAttribute("aria-invalid", "true");
+        }
+
+        function hideError(field) {
+          var el = document.getElementById("error-" + field);
+          if (el) el.hidden = true;
+          var input = field === "side" ? null : document.getElementById(field);
+          if (input) input.removeAttribute("aria-invalid");
+        }
+
+        function validEmail(value) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+        }
+
+        [name, organization, email].forEach(function (input) {
+          input.addEventListener("blur", function () {
+            validateField(input.id);
+          });
+        });
+        role.addEventListener("change", function () {
+          hideError("role");
+        });
+
+        function validateField(field) {
+          var ok = true;
+          if (field === "name") {
+            ok = name.value.trim().length > 0;
+          } else if (field === "organization") {
+            ok = organization.value.trim().length > 0;
+          } else if (field === "email") {
+            ok = validEmail(email.value.trim());
+          } else if (field === "role") {
+            ok = role.value !== "";
+          } else if (field === "side") {
+            ok = selectedSide !== "";
+          }
+          if (ok) hideError(field);
+          else showError(field);
+          return ok;
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var fields = ["side", "name", "organization", "email", "role"];
+          var allOk = true;
+          fields.forEach(function (f) {
+            if (!validateField(f)) allOk = false;
+          });
+          if (!allOk) return;
+
+          submitBtn.disabled = true;
+          submitLabel.textContent = "Submitting...";
+
+          // Prototype only: simulated submission, no data is sent anywhere.
+          setTimeout(function () {
+            window.location.href = "https://cheri12345.github.io/onboarding-v2/";
+          }, 700);
+        });
+      })();
+    </script>
+  </body>
+</html>
