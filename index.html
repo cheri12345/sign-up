@@ -59,6 +59,14 @@
         grid-template-columns: 1fr;
       }
 
+      .layout.confirming .panel-left {
+        display: none;
+      }
+
+      .layout.confirming {
+        grid-template-columns: 1fr;
+      }
+
       @media (min-width: 860px) {
         .layout {
           grid-template-columns: 40fr 60fr;
@@ -585,11 +593,13 @@
         var formView = document.getElementById("form-view");
         var confirmationView = document.getElementById("confirmation-view");
         var confirmHeading = document.getElementById("confirm-heading");
+        var layoutEl = document.querySelector(".layout");
 
         function showConfirmation(personName) {
           confirmHeading.textContent = personName ? "Welcome, " + personName + "!" : "You're in!";
           formView.hidden = true;
           confirmationView.hidden = false;
+          layoutEl.classList.add("confirming");
         }
 
         function continueToOnboarding(personName) {
