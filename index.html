@@ -59,14 +59,6 @@
         grid-template-columns: 1fr;
       }
 
-      .layout.confirming .panel-left {
-        display: none;
-      }
-
-      .layout.confirming {
-        grid-template-columns: 1fr;
-      }
-
       @media (min-width: 860px) {
         .layout {
           grid-template-columns: 40fr 60fr;
@@ -391,59 +383,6 @@
         text-decoration: underline;
       }
 
-      .confirmation {
-        text-align: center;
-        padding: 48px 0;
-      }
-
-      .confirmation .icon {
-        width: 56px;
-        height: 56px;
-        border-radius: 999px;
-        background: hsl(var(--teal) / 0.15);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 20px;
-      }
-
-      .confirmation .icon svg {
-        width: 28px;
-        height: 28px;
-        stroke: hsl(var(--teal));
-      }
-
-      .confirmation h2 {
-        font-family: "Archivo", system-ui, sans-serif;
-        font-weight: 700;
-        letter-spacing: -0.03em;
-        font-size: 1.5rem;
-        margin: 0 0 8px;
-      }
-
-      .confirmation p {
-        font-size: 0.9375rem;
-        color: hsl(var(--stone));
-        margin: 0;
-      }
-
-      .spinner {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        margin-top: 24px;
-        border: 2px solid hsl(var(--border));
-        border-top-color: hsl(var(--teal));
-        border-radius: 999px;
-        animation: spin 0.7s linear infinite;
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
       /* Desktop-only vertical rhythm, tuned to fit one viewport without scrolling. */
       @media (min-width: 860px) {
         .field-group {
@@ -566,18 +505,6 @@
               By continuing, you agree to our <a href="https://chelciehq.com/privacy">privacy policy</a>. We'll never share your information.
             </p>
           </div>
-
-          <div class="confirmation" id="confirmation-view" hidden>
-            <span class="icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                <polyline points="22 4 12 14.01 9 11.01"></polyline>
-              </svg>
-            </span>
-            <h2 id="confirm-heading">You're in!</h2>
-            <p id="confirm-body">Setting up your CHELCIE workspace&hellip;</p>
-            <span class="spinner" aria-hidden="true"></span>
-          </div>
         </div>
       </div>
     </div>
@@ -590,27 +517,14 @@
         var email = document.getElementById("email");
         var form = document.getElementById("access-form");
         var googleBtn = document.getElementById("google-btn");
-        var formView = document.getElementById("form-view");
-        var confirmationView = document.getElementById("confirmation-view");
-        var confirmHeading = document.getElementById("confirm-heading");
-        var layoutEl = document.querySelector(".layout");
 
-        function showConfirmation(personName) {
-          confirmHeading.textContent = personName ? "Welcome, " + personName + "!" : "You're in!";
-          formView.hidden = true;
-          confirmationView.hidden = false;
-          layoutEl.classList.add("confirming");
-        }
-
-        function continueToOnboarding(personName) {
+        function goToOnboarding(personName) {
           var url = ONBOARDING_URL;
           if (personName) {
             url += "?name=" + encodeURIComponent(personName);
           }
-          // Prototype only: simulated handoff, no data is sent anywhere.
-          setTimeout(function () {
-            window.location.href = url;
-          }, 1400);
+          // Prototype only: no data is sent anywhere.
+          window.location.href = url;
         }
 
         function showError(field) {
@@ -658,15 +572,12 @@
           });
           if (!allOk) return;
 
-          var personName = name.value.trim();
-          showConfirmation(personName);
-          continueToOnboarding(personName);
+          goToOnboarding(name.value.trim());
         });
 
         googleBtn.addEventListener("click", function () {
-          // Prototype only: no real OAuth, just simulates the handoff.
-          showConfirmation(null);
-          continueToOnboarding(null);
+          // Prototype only: no real OAuth, just goes straight to onboarding.
+          goToOnboarding(null);
         });
       })();
     </script>
